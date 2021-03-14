@@ -26,7 +26,7 @@ export const App = () => {
     setCart(cart);
   };
 
-  const handleRemoveCart = async (productId) => {
+  const handleRemoveFromCart = async (productId) => {
     const { cart } = await commerce.cart.remove(productId);
     setCart(cart);
   };
@@ -53,7 +53,7 @@ export const App = () => {
             <Cart
               cart={cart}
               handleUpdateCartQty={handleUpdateCartQty}
-              handleRemoveCart={handleRemoveCart}
+              handleRemoveFromCart={handleRemoveFromCart}
               handleEmptyCart={handleEmptyCart}
             />
           </Route>
