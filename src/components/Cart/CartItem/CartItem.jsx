@@ -4,7 +4,7 @@ import {Typography, Button, Card, CardActions, CardMedia,CardContent} from '@mat
 import useStyles from './style'
 import {Delete} from '@material-ui/icons'
 
-const CartItem = ({item, onUpdateCartQty, onRemoveFromCart}) =>{
+const CartItem = ({ item, onUpdateCartQty, onRemoveFromCart}) => {
     const classes = useStyles();
     
     return (
@@ -12,7 +12,7 @@ const CartItem = ({item, onUpdateCartQty, onRemoveFromCart}) =>{
             <CardMedia image={item.media.source} alt={item.name} className={classes.media}/>
             <CardContent className={classes.cardContent}>
             <Typography variant="h6">{item.name}</Typography>
-            <Typography variant="body1" className={classes.name}>{item.line_total.formatted_with_symbol}</Typography>
+            <Typography variant="body1" className={classes.price}>{item.line_total.formatted_with_symbol}</Typography>
             </CardContent>
             <CardActions className={CardActions}>
             <div className={classes.button}>
