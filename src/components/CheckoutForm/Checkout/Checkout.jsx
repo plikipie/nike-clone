@@ -1,9 +1,10 @@
 import React, {useState, useEffect } from 'react'
-import {Paper, Stepper, Step, StepLabel, Typography} from '@material-ui/core';
+import {Paper, Stepper, Step, StepLabel, Typography, CssBaseline} from '@material-ui/core';
 import useStyle from './style'
 import {commerce} from '../../../lib/commerce';
 import AddressForm from '../AddressForm';
 import PaymentForm from '../PaymentForm';
+
 const steps = ['Shipping Address','Payment Details']
 
 const Checkout = ({cart}) => {
@@ -11,6 +12,7 @@ const Checkout = ({cart}) => {
     const [activeStep, setActiveStep] = useState(0)
     const [shippingData, setShippingData] = useState({})
     const [checkoutToken, setCheckoutToken] = useState(null)
+    
     useEffect(()=> {
         const generateToken = async () => {
             try {
@@ -25,8 +27,10 @@ const Checkout = ({cart}) => {
 
     const nextStep = () => setActiveStep((prevActiveStep) => prevActiveStep + 1)
     const backStep = () => setActiveStep((prevActiveStep) => prevActiveStep - 1)
+    
     const next = (data) => {
         setShippingData(data)
+        nextStep();
     }
 
 
@@ -39,6 +43,7 @@ const Checkout = ({cart}) => {
     <AddressForm checkoutToken={checkoutToken} next={next}/> : <PaymentForm/>
     return (
         <>
+        <CssBaseline>
          <div className={classes.toolbar}/>
              <main className={classes.layout}>
                  <Paper className={classes.paper}>
@@ -54,6 +59,7 @@ const Checkout = ({cart}) => {
                     {activeStep === steps.length ? <Confirmation/> : checkoutToken && <Form/>}
                  </Paper>
              </main>
+             </CssBaseline>
             </>
     )
 }
