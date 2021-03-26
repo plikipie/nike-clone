@@ -1,5 +1,5 @@
 import React, {useState, useEffect } from 'react'
-import {Paper, Stepper, Step, StepLabel, Typography, CssBaseline} from '@material-ui/core';
+import {Paper, Stepper, Step, StepLabel, Typography, } from '@material-ui/core';
 import useStyle from './style'
 import {commerce} from '../../../lib/commerce';
 import AddressForm from '../AddressForm';
@@ -16,7 +16,7 @@ const Checkout = ({cart}) => {
     useEffect(()=> {
         const generateToken = async () => {
             try {
-                const token = await commerce.checkout.generateToken(cart.id, {type:'cart'})
+                const token = await commerce.checkout.generateToken(cart.id, {type:'cart'}) 
                 setCheckoutToken(token)
             }catch(error) {
                 
@@ -43,7 +43,7 @@ const Checkout = ({cart}) => {
     <AddressForm checkoutToken={checkoutToken} next={next}/> : <PaymentForm/>
     return (
         <>
-        <CssBaseline>
+       
          <div className={classes.toolbar}/>
              <main className={classes.layout}>
                  <Paper className={classes.paper}>
@@ -59,7 +59,7 @@ const Checkout = ({cart}) => {
                     {activeStep === steps.length ? <Confirmation/> : checkoutToken && <Form/>}
                  </Paper>
              </main>
-             </CssBaseline>
+            
             </>
     )
 }
