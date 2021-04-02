@@ -44,6 +44,7 @@ const PaymentForm = ({checkoutToken, shippingData, backStep, onCaptureCheckout, 
                     }
                 }
             }
+            // SPACE
             onCaptureCheckout(checkoutToken.id, orderData);
             timeout();
             // console.log(orderData)

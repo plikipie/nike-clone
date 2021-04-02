@@ -1,9 +1,9 @@
 import React from 'react';
 import {Container, Typography, Button, Grid} from '@material-ui/core';
-import useStyles from './style';
 import {Link} from 'react-router-dom'
 import CartItem from './CartItem/CartItem';
 import Zoom from 'react-reveal/Zoom'
+import useStyles from './style';
 
 const Cart = ({cart, handleEmptyCart, handleUpdateCartQty, handleRemoveFromCart}) => {
     const classes = useStyles();
@@ -39,7 +39,7 @@ const Cart = ({cart, handleEmptyCart, handleUpdateCartQty, handleRemoveFromCart}
     return (
         <Container>
             <div classes={classes.toolbar}/>
-            <Typography className={classes.title} variant="h3" gutterBottom>Your Shoping Cart</Typography>
+            <Typography className={classes.title} variant="h4" gutterBottom>Your Shopping Cart</Typography>
             {!cart.line_items.length ? <EmptyCart/> : <FilledCart/>}
         </Container>
     )
