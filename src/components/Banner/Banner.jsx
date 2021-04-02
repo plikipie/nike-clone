@@ -21,14 +21,14 @@ const Banner = ({refProduct}) => {
               Everything You Need Is
               <span className="caption"> Already Inside </span>
             </Typography>
-            </Slide>
             <Button className="shopping-button" onClick={showProduct}> Get Product </Button>
+            </Slide>
           </Grid>
 
           <Grid className="brand" item sm={6}>
-          <Slide right>
-            <img src={banner} alt="banner" />
-          </Slide>
+            <Slide right>
+              <img src={banner} alt="banner" />
+            </Slide>
           </Grid>
         </Grid>
       </Container>

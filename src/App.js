@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Products, Navbar, Banner, Cart, Checkout } from "./components";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { commerce } from "./lib/commerce";
@@ -6,6 +6,9 @@ import { commerce } from "./lib/commerce";
 export const App = () => {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState({});
+  const [order, setOrder] = useState({});
+  const [errorMessage, setErrorMessage] = useState("");
+  const refProduct = useRef(null);
 
   const fetchProducts = async () => {
     const { data } = await commerce.products.list();
@@ -34,6 +37,24 @@ export const App = () => {
     const { cart } = await commerce.cart.empty();
     setCart(cart);
   };
+  const refreshCart = async () => {
+    const newCart = await commerce.cart.refresh();
+    setCart(newCart);
+  };
+
+  const handleCaptureCheckout = async (checkoutTokenId, newOrder) => {
+    try {
+      const incomingOrder = await commerce.checkout.capture(
+        checkoutTokenId,
+        newOrder
+      );
+      setOrder(incomingOrder);
+      refreshCart();
+    } catch (error) {
+      setErrorMessage(error.data.error.message);
+    }
+  };
+
   // componentDidMount Equivalent
   useEffect(() => {
     fetchProducts();
@@ -46,8 +67,12 @@ export const App = () => {
         <Navbar totalItems={cart.total_items} />
         <Switch>
           <Route exact path="/">
-            <Banner />
-            <Products products={products} onAddToCart={handleAddToCart} />
+            <Banner refProduct={refProduct} />
+            <Products
+              refProduct={refProduct}
+              products={products}
+              onAddToCart={handleAddToCart}
+            />
           </Route>
           <Route exact path="/cart">
             <Cart
@@ -58,7 +83,12 @@ export const App = () => {
             />
           </Route>
           <Route exact path="/checkout">
-            <Checkout cart={cart} />
+            <Checkout
+              cart={cart}
+              order={order}
+              onCaptureCheckout={handleCaptureCheckout}
+              error={errorMessage}
+            />
           </Route>
         </Switch>
       </div>

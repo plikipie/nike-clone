@@ -40,7 +40,7 @@ const PaymentForm = ({checkoutToken, shippingData, backStep, onCaptureCheckout, 
                 payment: {
                     gateway: 'stripe',
                     stripe: {
-                        payment_method_id: paymentMethod.id
+                        payment_method_id: paymentMethod.id 
                     }
                 }
             }
