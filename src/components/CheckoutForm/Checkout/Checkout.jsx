@@ -26,9 +26,9 @@ const Checkout = ({cart, order, onCaptureCheckout, error}) => {
             }catch {
                 if(activeStep !== steps.length) history.push('/');
             }
-        }
+        };
         generateToken();
-    },[cart])
+    },[cart]);
 
     const nextStep = () => setActiveStep((prevActiveStep) => prevActiveStep + 1)
     const backStep = () => setActiveStep((prevActiveStep) => prevActiveStep - 1)
@@ -44,7 +44,7 @@ const Checkout = ({cart, order, onCaptureCheckout, error}) => {
         },3000)
     }
 
-    let Confirmation = () =>order.customer ? (
+    let Confirmation = () => order.customer ? (
         <>
         <div>
             <Typography variant="h5">Thank You for your purchase, {order.customer.firstname} {order.customer.lastname}</Typography>

@@ -3,6 +3,7 @@ import {Container, Typography, Button, Grid} from '@material-ui/core';
 import useStyles from './style';
 import {Link} from 'react-router-dom'
 import CartItem from './CartItem/CartItem';
+import Zoom from 'react-reveal/Zoom'
 
 const Cart = ({cart, handleEmptyCart, handleUpdateCartQty, handleRemoveFromCart}) => {
     const classes = useStyles();
@@ -14,9 +15,11 @@ const Cart = ({cart, handleEmptyCart, handleUpdateCartQty, handleRemoveFromCart}
 
     const FilledCart = () => (
         <>
-        <Grid container spacing={3}>{cart.line_items.map((item) => (
-            <Grid item xs={12} sm={6} key={item.id}>
+        <Grid container spacing={3}>{cart.line_items.map((item,index) => (
+            <Grid item xs={12} sm={6} key={`${item.id}-${index}`}>
+            <Zoom big delay={500 * index} >
             <CartItem item={item} onUpdateCartQty={handleUpdateCartQty} onRemoveFromCart={handleRemoveFromCart}/>
+            </Zoom>
             </Grid>
         ))}
         </Grid>

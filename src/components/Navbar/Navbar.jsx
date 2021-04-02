@@ -8,6 +8,7 @@ import {
 } from "@material-ui/core";
 import { ShoppingCart } from "@material-ui/icons";
 import {Link, useLocation} from 'react-router-dom'
+import Fade from 'react-reveal/Fade';
 import logo from "../../assets/logo.png";
 import useStyles from "./style";
 
@@ -16,6 +17,7 @@ const Navbar = ({totalItems}) => {
   const location = useLocation();
   return (
     <AppBar position="fixed" className={classes.appBar} color="inherit">
+    <Fade>
       <Toolbar>
         <Typography component={Link} to="/" variant="h6" className={classes.title} color="inherit">
           <img src={logo} alt="Nike" height="25px" className={classes.image} />
@@ -32,6 +34,7 @@ const Navbar = ({totalItems}) => {
         )}
         
       </Toolbar>
+      </Fade>
     </AppBar>
   );
 };
