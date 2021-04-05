@@ -62,7 +62,7 @@ export default makeStyles((theme) => ({
   },
   next: {
     color: "white",
-    backgroundColor: "#00e676",
+    backgroundColor: "#red",
     "&:hover": {
       color: "white",
       backgroundColor: "#00c853",

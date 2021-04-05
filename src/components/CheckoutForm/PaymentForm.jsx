@@ -1,7 +1,7 @@
 import React from 'react'
-import {Typography, Button, Divider} from '@material-ui/core'
-import {Elements, CardElement, ElementsConsumer} from '@stripe/react-stripe-js'
-import {loadStripe} from '@stripe/stripe-js'
+import { Typography, Button, Divider } from '@material-ui/core'
+import { Elements, CardElement, ElementsConsumer } from '@stripe/react-stripe-js'
+import { loadStripe } from '@stripe/stripe-js'
 import Review from './Review'
 import useStyle from './Checkout/style'
 
@@ -13,10 +13,11 @@ const PaymentForm = ({checkoutToken, shippingData, backStep, onCaptureCheckout, 
         // not refresh after click button
         event.preventDefault();
         if(!stripe || !elements) return;
-        const cardElement = elements.getElements(CardElement);
+        const cardElement = elements.getElement(CardElement);
+        
 
         // payment method
-        const {error,paymentMethod} = await stripe.createPaymentMethod({type: 'card', card:cardElement});
+        const { error, paymentMethod } = await stripe.createPaymentMethod({type: 'card', card:cardElement});
 
         if(error) {
             console.log(error)
@@ -46,6 +47,7 @@ const PaymentForm = ({checkoutToken, shippingData, backStep, onCaptureCheckout, 
             }
             // SPACE
             onCaptureCheckout(checkoutToken.id, orderData);
+            console.log(orderData);
             timeout();
             // console.log(orderData)
             nextStep();
@@ -57,7 +59,7 @@ const PaymentForm = ({checkoutToken, shippingData, backStep, onCaptureCheckout, 
         <>
             <Review checkoutToken={checkoutToken}/>
             <Divider />
-            <Typography variant="h6" gutterBottom style={{margin: '20px 0'}}>Payment method</Typography>
+            <Typography variant="h6" gutterBottom style={{margin: '20px 0'}}>Payment Method</Typography>
             <Elements stripe={stripePromise}>
                 <ElementsConsumer>
                     {({elements, stripe}) => (
