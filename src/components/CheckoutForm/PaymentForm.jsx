@@ -37,7 +37,7 @@ const PaymentForm = ({checkoutToken, shippingData, backStep, onCaptureCheckout, 
                     postal_zip_code:shippingData.zip,
                     country:shippingData.shippingCountry
                 },
-                fullfilment: {shipping_method: shippingData.shippingOption},
+                fulfillment: {shipping_method: shippingData.shippingOption},
                 payment: {
                     gateway: 'stripe',
                     stripe: {
@@ -47,8 +47,8 @@ const PaymentForm = ({checkoutToken, shippingData, backStep, onCaptureCheckout, 
             }
             // SPACE
             onCaptureCheckout(checkoutToken.id, orderData);
-            console.log(orderData);
             timeout();
+            
             // console.log(orderData)
             nextStep();
         }
